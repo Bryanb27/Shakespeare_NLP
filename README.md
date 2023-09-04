@@ -4,7 +4,7 @@ This code was developed for the college subject Text Mining and Analysis.
 
 ## Overview
 
-This Python project is designed to preprocess the text from the "Shakespeare.txt" file, which is available in the "datasets" directory. It performs the following text processing tasks:
+This Python project is designed to preprocess the text from the "Shakespeare.txt" file. It performs the following text processing tasks:
 
 ### 1. Normalization
 - Lowercase conversion
