@@ -37,6 +37,6 @@ To use this project:
 
 1. **Clone this repository** to your local machine.
 2. Ensure you have **Python installed** along with the required libraries (e.g., NLTK, TextBlob, spaCy, Gensim).
-3. **Run the Python scripts** provided for each task.
+3. **Run the Python script** provided.
 4. **Customize file paths and parameters** as needed.
 5. Check the respective **output files and directories** for results.
