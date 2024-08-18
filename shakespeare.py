@@ -18,18 +18,18 @@ from nltk.stem.snowball import SnowballStemmer
 from collections import Counter
 import pandas as pd
 
-#Downloads
+# Downloads
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
 
-#To calculate all the metrics
+# To calculate all the metrics
 def calculate_metrics(tokens):
     token_counts = Counter(tokens)
     total_tokens = len(tokens)
     total_unique_tokens = len(token_counts)
 
-    #Fix division by 0 error
+    # Fix division by 0 error
     if total_unique_tokens == 0:
         avg_occurrences = 0
         avg_token_length = 0
@@ -39,14 +39,14 @@ def calculate_metrics(tokens):
     
     return total_unique_tokens, avg_occurrences, avg_token_length
 
-#Generate CSV
+# Generate CSV
 def generate_vocab_csv(tokens, file_name):
     token_counts = Counter(tokens)
     vocab_df = pd.DataFrame(list(token_counts.items()), columns=['Token', 'Count'])
-    vocab_df[ 'Token_Length' ] = vocab_df['Token'].apply(len)
+    vocab_df['Token_Length'] = vocab_df['Token'].apply(len)
     vocab_df.to_csv(file_name, index=False)
 
-#Read and Write files
+# Read and Write files
 def read_file(file_name):
     with open(file_name, 'r', encoding='utf-8') as file:
         input_text = file.read()
@@ -57,21 +57,21 @@ def write_file(file_name, tokenized_text):
         for token in tokenized_text:
             output_file.write(token + '\n')  
 
-#A write method to fix a bug
+# A write method to fix a bug
 def write_file_First(file_name, write_text):
     with open(file_name, 'w', encoding='utf-8') as output_file:
         for token in write_text:
             output_file.write(token + '')
         output_file.write('\n')
 
-#A read method to fix a bug
+# A read method to fix a bug
 def read_file_Lines(file_name):
     with open(file_name, 'r', encoding='utf-8') as file:
         input_lines = [ line.strip() for line in file.readlines() ]
     return input_lines
 
 
-#Funtion to stem text
+# Funtion to stem text
 def text_stemming():
     lemmatized_text = read_file_Lines("Shakespeare_Normalized_Tokenized_StopWord_Lemmatized.txt")
     stemmer01 = PorterStemmer()
@@ -81,14 +81,14 @@ def text_stemming():
     write_file("Shakespeare_Normalized_Tokenized_StopWord_Lemmatized_Stemming01.txt", stemmed_Porter)
     write_file("Shakespeare_Normalized_Tokenized_StopWord_Lemmatized_Stemming02.txt", stemmed_Snowball)
 
-#Function to lemmatizer text
+#F unction to lemmatizer text
 def lemmatizer_function():
     nostopwords_text = read_file_Lines("Shakespeare_Normalized_Tokenized_StopWord.txt")
     lemmatizer = WordNetLemmatizer()
     lemmatized_text = [ lemmatizer.lemmatize(word) for word in nostopwords_text ]
     write_file("Shakespeare_Normalized_Tokenized_StopWord_Lemmatized.txt", lemmatized_text)
 
-#Funtion to remove stopword
+# Funtion to remove stopword
 def stopwords_function():
     tokenized_text = read_file_Lines("Shakespeare_Normalized_Tokenized02.txt")
     sw = stopwords.words('english')
